@@ -59,7 +59,7 @@ PoseStatus lookupTransform(const tf2_ros::Buffer& buffer,
 struct TFLookup {
   struct Config {
     //! Amount of time to wait between tf lookup attempts
-    double wait_duration_s = 0.1;
+    double wait_duration_s = 2;
     //! Buffer size in second for tf
     double buffer_size_s = 30.0;
     //! Number of lookup attempts before giving up

@@ -4,7 +4,7 @@
     <param name="use_sim_time" value="$(arg sim_time_required)"/>
 
     <arg name="use_gt_frame" default="true" doc="use simulator-provided tf frame"/>
-    <arg name="use_gt_semantics" default="true" doc="use simulator-provider semantics"/>
+    <arg name="use_gt_semantics" default="false" doc="use simulator-provider semantics"/>
     <arg name="color_mesh_by_label" default="false" doc="display mesh colored by semantic label"/>
     <arg name="use_single_channel_label_image" default="false"/>
 
@@ -45,7 +45,7 @@
         <include file="$(find semantic_inference_ros)/launch/semantic_inference.launch" pass_all_args="true"/>
     </group>
 
-    <arg name="use_openset_features" default="false" doc="assign clip features to places"/>
+    <arg name="use_openset_features" default="true" doc="assign clip features to places"/>
     <group if="$(arg use_openset_features)">
         <remap from="/clip_publisher_node/image" to="/tesse/left_cam/rgb/image_raw"/>
         <remap from="/clip_publisher_node/feature" to="/hydra_ros_node/input/left_cam/feature"/>

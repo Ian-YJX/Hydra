@@ -70,7 +70,7 @@ InputModule::Config RosInputModule::Config::remapSensors() const {
       LOG(WARNING) << "Invalid ROS name found for sensor: '" << name
                    << "'. Remapping to '" << sensor_name << "'";
     }
-
+    // LOG(WARNING) << "sensor name is: " << sensor_name;
     to_return.inputs[sensor_name] = input_pair;
     to_return.inputs[sensor_name].sensor =
         input::loadSensor(input_pair.sensor, sensor_name);
