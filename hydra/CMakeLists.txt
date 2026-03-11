@@ -8,25 +8,13 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # set(PCL_DIR "/usr/lib/x86_64-linux-gnu/cmake/pcl" CACHE PATH "PCL cmake dir" FORCE)
 add_compile_options(-Wall -Wextra)
 # ---- FLANN compatibility layer (for consumers of kimera_pgmo) ----
-if(NOT TARGET FLANN::FLANN)
-  find_path(FLANN_INCLUDE_DIR
-    NAMES flann/flann.hpp
-    PATHS /usr/include /usr/local/include
-  )
-
-  find_library(FLANN_LIBRARY
-    NAMES flann flann_cpp
-    PATHS /usr/lib/x86_64-linux-gnu /usr/local/lib
-  )
-
-  if(FLANN_LIBRARY)
-    add_library(FLANN::FLANN UNKNOWN IMPORTED)
-    set_target_properties(FLANN::FLANN PROPERTIES
-      IMPORTED_LOCATION "${FLANN_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${FLANN_INCLUDE_DIR}"
-    )
-  endif()
-endif()
+# ---- force FLANN hints before kimera_pgmo / PCL are resolved ----
+set(FLANN_ROOT "/usr" CACHE PATH "FLANN root" FORCE)
+set(FLANN_INCLUDE_DIR "/usr/include" CACHE PATH "FLANN include dir" FORCE)
+set(FLANN_INCLUDE_DIRS "/usr/include" CACHE PATH "FLANN include dirs" FORCE)
+set(FLANN_LIBRARY "/usr/lib/x86_64-linux-gnu/libflann_cpp.so" CACHE FILEPATH "FLANN lib" FORCE)
+set(FLANN_LIBRARIES "/usr/lib/x86_64-linux-gnu/libflann_cpp.so" CACHE FILEPATH "FLANN libs" FORCE)
+set(FLANN_LIBRARY_RELEASE "/usr/lib/x86_64-linux-gnu/libflann_cpp.so" CACHE FILEPATH "FLANN release lib" FORCE)
 
 option(HYDRA_ENABLE_COVERAGE "Build core library with GCC --coverage option" OFF)
 option(HYDRA_ENABLE_EVAL "Build evaluation code" ON)
