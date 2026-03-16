@@ -8,10 +8,10 @@
     <arg name="color_mesh_by_label" default="false" doc="display mesh colored by semantic label"/>
     <arg name="use_single_channel_label_image" default="false"/>
 
-    <arg name="robot_frame" default="$(eval 'base_link_gt' if use_gt_frame else 'base_link_kimera')" doc="robot body tf frame"/>
+    <arg name="robot_frame" default="$(eval 'base_link_gt' if use_gt_frame else 'base_link')" doc="robot body tf frame"/>
     <arg name="odom_frame" default="$(eval 'world' if use_gt_frame else 'odom')" doc="odometry (map) frame"/>
-    <arg name="sensor_frame" default="$(eval 'left_cam' if use_gt_frame else 'left_cam_kimera')" doc="camera frame"/>
-    <arg name="hydra_config_path" default="$(find hydra)/config/datasets/uhumans2.yaml"/>
+    <arg name="sensor_frame" default="left_cam" doc="camera frame"/>
+    <arg name="hydra_config_path" default="$(find hydra)/config/datasets/default.yaml"/>
     <!-- lcd config -->
     <arg name="use_gnn_descriptors" default="false"/>
     <arg name="lcd_config_name" default="$(eval 'uhumans2_gnn.yaml' if use_gnn_descriptors else 'uhumans2.yaml')"/>
@@ -34,7 +34,7 @@
 
     <arg name="use_static_tfs" default="true" doc="publish static tfs from file"/>
     <group if="$(arg use_static_tfs)">
-        <include file="$(find hydra_ros)/launch/static_tfs/uhumans2_static_tfs.xml"/>
+        <!-- <include file="$(find hydra_ros)/launch/static_tfs/default_static_tfs.xml"/> -->
 
         <node pkg="tf2_ros" type="static_transform_publisher" name="fake_world_tf" args="0 0 0 0 0 0 1 map world" if="$(arg use_gt_frame)"/>
     </group>
@@ -58,8 +58,8 @@
     <remap from="hydra_ros_node/input/left_cam/semantic/image_raw" to="$(arg label_topic)"/>
     <remap from="hydra_ros_node/pose_graph" to="kimera_vio_ros/pose_graph_incremental" unless="$(arg use_gt_frame)"/>
     <include file="$(find hydra_ros)/launch/hydra.launch" pass_all_args="true">
-        <arg name="dataset_name" default="uhumans2"/>
-        <arg name="rviz_path" default="$(find hydra_ros)/rviz/uhumans2.rviz"/>
+        <arg name="dataset_name" default="default"/>
+        <arg name="rviz_path" default="$(find hydra_ros)/rviz/default.rviz"/>
     </include>
 
 </launch>

@@ -1,0 +1,9 @@
+<launch>
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_0" args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 kinect base_link_gt"/>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_1" args="0.039, 0.007, -0.094 0.198, 0.177, -0.720, 0.641 kinect openni_camera"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_3" args="0.0 0.0 2.0 0.0 0.0 0.0 1.0 openni_camera openni_rgb_frame"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_2" args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 openni_rgb_frame left_cam"/> -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_0" args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 base_link left_cam"/>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="bag_static_tf_1" args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 left_cam depth_cam"/>
+</launch>
